@@ -25,20 +25,85 @@
     return result;
   };
 
+  const getLinkName = (data) => {
+    const array = data.split('/');
+    return array[array.length - 1];
+  };
+
+  const getLink = (data) => {
+    const number = getLinkName(data);
+    return `/episodes/episode-${number}`;
+  };
+
+  const checkStatus = (status) => {
+    return status === 'Alive' ? 'danger' : status === 'Dead' ? 'dark' : 'secondary';
+  }
+
   const currentItem = findItem();
+
+  console.log('item', currentItem);
 
 </script>
 
 <template>
-    <i class="title">Character card</i>
+  <Container>
 
-    <Alert color="success">
-      character id from route: {{ ch_id }}<br><br>
+    <Row>
+      <h4 class="title">Character card</h4>
+    </Row>
 
-      character from mystore: name {{ currentItem.name }}, species {{ currentItem.species }}, gender {{ currentItem.gender }}<br><br>
-    </Alert>
+    <Row>
+      <Col col="sm-12 md-9 lg-6">
+        <Card background-color="info-subtle">
+          <CardImgTop
+              :src="currentItem.image"
+              :alt="currentItem.name"
+          />
+          <CardHeader><b>Id</b> from route: {{ ch_id }}</CardHeader>
+          <CardBody>
+            <CardTitle>{{ currentItem.name }}
+              <Badge :color="checkStatus(currentItem.status)">
+                {{ currentItem.status }}
+              </Badge>
+            </CardTitle>
+            <CardText>
+              <b>Gender:</b> {{ currentItem.gender }}<br>
+              <b>Specie:</b> {{ currentItem.species }}<br>
+              <b>Origin:</b> {{ currentItem.origin['name'] }}<br>
+              <b>Location:</b> {{ currentItem.location['name'] }}<br>
+              <b>In episodes:</b><br>
+              <div>
+                <Anchor v-for="episode in currentItem.episode"
+                    button
+                    size="sm"
+                    color="outline-primary"
+                    :to="getLink(episode)"
+                >
+                  {{ getLinkName(episode) }}
+                </Anchor>
+              </div>
+            </CardText>
+          </CardBody>
+          <CardFooter text-color="body-secondary">
+            <b>Created:</b> {{ currentItem.created }}
+          </CardFooter>
+        </Card>
+      </Col>
+    </Row>
+
+  </Container>
 </template>
 
 <style scoped>
-
+  .row {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .card-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  .btn {
+    margin: 4px 8px 4px 0;
+  }
 </style>

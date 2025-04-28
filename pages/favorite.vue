@@ -5,9 +5,20 @@
 <template>
   <i class="title">favorites</i>
 
-  <Alert color="success">
-    A simple light alert—check it out!
-  </Alert>
+  <article class="favorites_chapter">
+    <h4>Избранные персонажи</h4>
+    ...
+  </article>
+
+  <article class="favorites_chapter">
+    <h4>Избранные локации</h4>
+    ...
+  </article>
+
+  <article class="favorites_chapter">
+    <h4>Избранные эпизоды</h4>
+    ...
+  </article>
 </template>
 
 <style scoped>
