@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <NuxtLink :to="`/episodes/episodes-${episode.id}`" :data="episode" class="">
+  <NuxtLink :to="`/episodes/episode-${episode.id}`" :data="episode" class="">
     {{ episode.episode }} (id: {{ episode.id }}, on air: {{ episode.air_date }})
   </NuxtLink>
 </template>

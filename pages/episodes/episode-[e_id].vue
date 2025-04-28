@@ -1,10 +1,10 @@
 <script setup>
-  import { useCharactersStore } from '@/stores/charactersStore';
-  const myStore = useCharactersStore();
+  import { useEpisodesStore } from '@/stores/episodesStore';
+  const myStore = useEpisodesStore();
 
   myStore.init();
 
-  const { ch_id } = useRoute().params;
+  const { e_id } = useRoute().params;
 
   console.log('mystore', myStore);
 
@@ -12,7 +12,7 @@
     let result = {};
 
     myStore.items.forEach((item) => {
-      if (Number(item.id) === Number(ch_id)) {
+      if (Number(item.id) === Number(e_id)) {
         result = item;
       }
     });
@@ -27,12 +27,8 @@
 
   const getLink = (data) => {
     const number = getLinkName(data);
-    return `/episodes/episode-${number}`;
+    return `/characters/character-${number}`;
   };
-
-  const checkStatus = (status) => {
-    return status === 'Alive' ? 'danger' : status === 'Dead' ? 'dark' : 'secondary';
-  }
 
   const currentItem = findItem();
 
@@ -43,35 +39,28 @@
   <Container>
 
     <Row>
-      <h4 class="title">Карточка персонажа</h4>
+      <h4 class="title">Карточка эпизода</h4>
 
       <Col col="sm-12 md-9 lg-6">
         <Card background-color="info-subtle">
-          <CardImgTop
-              :src="currentItem.image"
-              :alt="currentItem.name"
-          />
-          <CardHeader><b>Id</b> from route: {{ ch_id }}</CardHeader>
+          <CardHeader><b>Id</b> from route: {{ e_id }}</CardHeader>
           <CardBody>
             <CardTitle>{{ currentItem.name }}
-              <Badge :color="checkStatus(currentItem.status)">
-                {{ currentItem.status }}
+              <Badge color="warning">
+                {{ currentItem.episode }}
               </Badge>
             </CardTitle>
             <CardText>
-              <b>Gender:</b> {{ currentItem.gender }}<br>
-              <b>Specie:</b> {{ currentItem.species }}<br>
-              <b>Origin:</b> {{ currentItem.origin['name'] }}<br>
-              <b>Location:</b> {{ currentItem.location['name'] }}<br>
-              <b>In episodes:</b><br>
+              <b>Air date:</b> {{ currentItem.air_date }}<br>
+              <b>Characters:</b><br>
               <div>
-                <Anchor v-for="episode in currentItem.episode"
-                    button
-                    size="sm"
-                    color="outline-primary"
-                    :to="getLink(episode)"
+                <Anchor v-for="character in currentItem.characters"
+                        button
+                        size="sm"
+                        color="outline-primary"
+                        :to="getLink(character)"
                 >
-                  {{ getLinkName(episode) }}
+                  {{ getLinkName(character) }}
                 </Anchor>
               </div>
             </CardText>
