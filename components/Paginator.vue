@@ -11,7 +11,7 @@
   const totalStep = ref<number>(0);
   const startNumber = ref<number>(1);
   const numberList = ref<number[]>([]);
-  const itemCount: number = 5;
+  const itemCount: number = 3;
 
   function init(): void {
     const stepData: number = Math.ceil(props.active / itemCount);
@@ -52,23 +52,37 @@
 </script>
 
 <template>
-  <div v-if="props.total > 1" class="pagination">
-    <button class="link" :disabled="step === 1" @click="movePageEvent(startNumber - 1)">&lt;</button>
-    <button
-        v-for="(item, count) in numberList"
-        class="link"
-        :class="{ '--active': item === props.active }"
-        :key="`btn-page${count}`"
-        @click="movePageEvent(item)"
+  <Pagination v-if="props.total > 1">
+    <PageItem
+        :disabled="step === 1"
+        @click="movePageEvent(startNumber - 1)"
     >
-      {{ item }}
-    </button>
-    <button class="link" :disabled="step === totalStep" @click="movePageEvent(startNumber + itemCount)">
-      &gt;
-    </button>
-  </div>
+      <PageLink aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </PageLink>
+    </PageItem>
+
+    <PageItem v-for="(item, count) in numberList"
+              :active="item === props.active"
+              :key="`btn-page${count}`"
+              @click="movePageEvent(item)"
+    >
+      <PageLink>{{ item }}</PageLink>
+    </PageItem>
+
+    <PageItem
+        :disabled="step === totalStep"
+        @click="movePageEvent(startNumber + itemCount)"
+    >
+      <PageLink aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </PageLink>
+    </PageItem>
+  </Pagination>
 </template>
 
 <style scoped>
-
+  .page-link {
+    cursor: pointer;
+  }
 </style>

@@ -3,7 +3,10 @@ import axios from "axios";
 
 export const useCharactersStore = defineStore('Characters', {
     state: () => ({
-        count: 18745457889,
+        count: 0,
+        pages: 0,
+        perPage: 6,
+        currentPage: 1,
         items: [
             {
                 id: 6,
@@ -22,6 +25,8 @@ export const useCharactersStore = defineStore('Characters', {
         async fetchData() {
             await axios.get("https://rickandmortyapi.com/api/character").then(({ data }) => {
                 this.items = Object.values(data.results);
+                this.count = this.items.length;
+                this.pages = Math.ceil(this.count / this.perPage);
             });
         }
     },

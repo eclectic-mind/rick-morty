@@ -1,3 +1,4 @@
 import { useCharactersStore } from "@/stores/charactersStore";
 import { useLocationsStore } from "@/stores/locationsStore";
-export { useLocationsStore, useCharactersStore };
+import { useFavoritesStore } from "@/stores/favoritesStore";
+export { useLocationsStore, useCharactersStore, useFavoritesStore };

@@ -8,7 +8,7 @@
 
 <template>
   <i class="title">Локации</i>
-  <p>Count: {{ locStore.count }}</p>
+  <p>Всего: {{ locStore.count }}</p>
   <ul>
     <li v-for="elem in locations" :key="elem.id">
       <LocationLink :location="elem" />

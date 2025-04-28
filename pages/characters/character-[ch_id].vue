@@ -49,10 +49,8 @@
   <Container>
 
     <Row>
-      <h4 class="title">Character card</h4>
-    </Row>
+      <h4 class="title">Карточка персонажа</h4>
 
-    <Row>
       <Col col="sm-12 md-9 lg-6">
         <Card background-color="info-subtle">
           <CardImgTop
@@ -96,7 +94,7 @@
 
 <style scoped>
   .row {
-    margin-top: 2rem;
+    margin-top: 4rem;
     margin-bottom: 2rem;
   }
   .card-title {

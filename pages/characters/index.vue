@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
   // const { data } = await useFetch('https://rickandmortyapi.com/api/character');
   // const characters = ref(data.value.results);
 
@@ -11,22 +11,32 @@
   const myStore = useCharactersStore();
 
   myStore.init();
-
-
 </script>
 
 <template>
-    <i class="title">Персонажи</i>
-    <ul>
-      <li v-for="elem in myStore.items" :key="elem.id">
-        <CharacterLink :character="elem" />
-      </li>
-    </ul>
-    <Pagination url="/characters/page/$`" :active="1" :total="50" />
+  <Container>
+
+    <Row>
+        <h4 class="title">Персонажи</h4>
+        <p class="text-secondary">Всего: {{ myStore.count }}</p>
+
+        <ul>
+          <li v-for="elem in myStore.items" :key="elem.id">
+            <CharacterLink :character="elem" />
+          </li>
+        </ul>
+
+        <nav aria-label="pagination">
+          <Paginator url="/characters/page/$/" :active="myStore.currentPage" :total="myStore.pages" />
+        </nav>
+    </Row>
+
+  </Container>
 </template>
 
 <style scoped>
-.title {
-  color: red;
+.row {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 }
 </style>

@@ -3,7 +3,6 @@
   const myStore = useLocationsStore();
 
   const { l_id } = useRoute().params;
-  console.log('use route params - loc', useRoute().params, 'name', useRoute().params.name);
 </script>
 
 <template>

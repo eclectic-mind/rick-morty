@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
 
-export const useLocationsStore = defineStore('Locations', {
+export const useEpisodesStore = defineStore('Episodes', {
     state: () => ({
         count: 6456476,
         pages: 0,
@@ -24,7 +24,7 @@ export const useLocationsStore = defineStore('Locations', {
                     "https://rickandmortyapi.com/api/character/356",
                     "https://rickandmortyapi.com/api/character/394"
                 ],
-                url: "https://rickandmortyapi.com/api/location/1",
+                url: "https://rickandmortyapi.com/api/episode/1",
                 created: "2017-11-10T12:42:04.162Z"
             }
         ]
@@ -36,7 +36,7 @@ export const useLocationsStore = defineStore('Locations', {
         },
 
         async fetchData() {
-            await axios.get("https://rickandmortyapi.com/api/location").then(({ data }) => {
+            await axios.get("https://rickandmortyapi.com/api/episode").then(({ data }) => {
                 this.items = Object.values(data.results);
                 this.count = this.items.length;
                 this.pages = Math.ceil(this.count / this.perPage);

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
   const { location } = defineProps(['location']);
 </script>
 
