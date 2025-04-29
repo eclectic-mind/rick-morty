@@ -1,18 +1,15 @@
 <script setup>
-  import { useCharactersStore } from '@/stores/charactersStore';
+  const { ch_id } = useRoute().params;
   const myStore = useCharactersStore();
+  const favStore = useFavoritesStore();
 
   myStore.init();
 
-  const { ch_id } = useRoute().params;
+  const findItem = (array, id) => {
+    let result = null;
 
-  console.log('mystore', myStore);
-
-  const findItem = () => {
-    let result = {};
-
-    myStore.items.forEach((item) => {
-      if (Number(item.id) === Number(ch_id)) {
+    array.forEach((item) => {
+      if (Number(item.id) === Number(id)) {
         result = item;
       }
     });
@@ -32,11 +29,27 @@
 
   const checkStatus = (status) => {
     return status === 'Alive' ? 'danger' : status === 'Dead' ? 'dark' : 'secondary';
-  }
+  };
 
-  const currentItem = findItem();
+  const checkFav = (id) => {
+    const inFavorites = findItem(favStore.characters, id);
 
-  console.log('current item', currentItem);
+    return inFavorites ? 'pink' : 'white';
+  };
+
+  const setFav = (item) => {
+    const inFavorites = findItem(favStore.characters, ch_id);
+
+    if (!inFavorites) {
+      favStore.addFavCharacter(item);
+    } else {
+      favStore.removeFavCharacter(item);
+    }
+  };
+
+  const currentItem = findItem(myStore.items, ch_id);
+
+  console.log('item', currentItem);
 </script>
 
 <template>
@@ -45,8 +58,14 @@
     <Row>
       <h4 class="title">Карточка персонажа</h4>
 
-      <Col col="sm-12 md-9 lg-6">
+      <Col v-if="currentItem" col="sm-12 md-9 lg-6">
         <Card background-color="info-subtle">
+          <IconBox
+              icon="bi:heart-fill"
+              size="lg"
+              :color="checkFav(ch_id)"
+              @click="setFav(currentItem)"
+          />
           <CardImgTop
               :src="currentItem.image"
               :alt="currentItem.name"
@@ -90,6 +109,15 @@
   .row {
     margin-top: 4rem;
     margin-bottom: 2rem;
+  }
+  .card {
+    position: relative;
+  }
+  .icon-box {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
   }
   .card-title {
     display: flex;

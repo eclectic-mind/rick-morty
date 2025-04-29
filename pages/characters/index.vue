@@ -7,10 +7,38 @@
 
   // console.log('data', characters, typeof characters);
 
-  import { useCharactersStore } from '@/stores/charactersStore';
   const myStore = useCharactersStore();
+  const favStore = useFavoritesStore();
 
   myStore.init();
+
+  const findItem = (array: [], id: number) => {
+    let result = null;
+
+    array.forEach((item: any) => {
+      if (Number(item.id) === Number(id)) {
+        result = item;
+      }
+    });
+
+    return result;
+  };
+
+  const checkFav = (id) => {
+    const inFavorites = findItem(favStore.characters, id);
+
+    return inFavorites ? 'pink' : 'white';
+  };
+
+  const setFav = (item) => {
+    const inFavorites = findItem(favStore.characters, item.id);
+
+    if (!inFavorites) {
+      favStore.addFavCharacter(item);
+    } else {
+      favStore.removeFavCharacter(item);
+    }
+  };
 </script>
 
 <template>
@@ -23,6 +51,12 @@
         <ul>
           <li v-for="elem in myStore.items" :key="elem.id">
             <CharacterLink :character="elem" />
+            <IconBox
+                icon="bi:heart-fill"
+                size="sm"
+                :color="checkFav(elem.id)"
+                @click="setFav(elem)"
+            />
           </li>
         </ul>
 
@@ -38,5 +72,12 @@
 .row {
   margin-top: 4rem;
   margin-bottom: 2rem;
+}
+li {
+  margin: 1rem 1rem 1rem;
+}
+.icon-box {
+  cursor: pointer;
+  pointer-events: all;
 }
 </style>

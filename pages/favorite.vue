@@ -2,7 +2,10 @@
   import { useFavoritesStore } from '@/stores/favoritesStore';
 
   const favoritesStore = useFavoritesStore();
-  favoritesStore.init();
+
+  const removeFav = (item) => {
+    favoritesStore.removeFavCharacter(item);
+  };
 </script>
 
 <template>
@@ -14,6 +17,11 @@
       <ul>
         <li v-for="elem in favoritesStore.characters" :key="elem.id">
           <CharacterLink :character="elem" />
+          <IconBox
+              icon="bi:hand-thumbs-down-fill"
+              size="sm"
+              @click="removeFav(elem)"
+          />
         </li>
       </ul>
     </Row>
@@ -25,6 +33,11 @@
       <ul>
         <li v-for="elem in favoritesStore.locations" :key="elem.id">
           <LocationLink :location="elem" />
+          <IconBox
+              icon="bi:hand-thumbs-down-fill"
+              size="sm"
+              @click="removeFav(elem)"
+          />
         </li>
       </ul>
     </Row>
@@ -36,6 +49,11 @@
       <ul>
         <li v-for="elem in favoritesStore.episodes" :key="elem.id">
           <EpisodeLink :episode="elem" />
+          <IconBox
+              icon="bi:hand-thumbs-down-fill"
+              size="sm"
+              @click="removeFav(elem)"
+          />
         </li>
       </ul>
     </Row>
@@ -46,5 +64,9 @@
   .row {
     margin-top: 4rem;
     margin-bottom: 2rem;
+  }
+  .icon-box {
+    cursor: pointer;
+    pointer-events: all;
   }
 </style>

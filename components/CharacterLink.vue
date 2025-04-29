@@ -3,11 +3,13 @@
 </script>
 
 <template>
-  <NuxtLink :to="`/characters/character-${character.id}`" :data="character" class="">
-    {{ character.name }} (id: {{ character.id }}, status: {{ character.status }}, species: {{ character.species }})
+  <NuxtLink :to="`/characters/character-${character.id}`" :data="character" color="info">
+    <b>{{ character.name }}</b> (id: {{ character.id }})
   </NuxtLink>
 </template>
 
 <style scoped>
-
+li {
+  margin-bottom: 1rem;
+}
 </style>

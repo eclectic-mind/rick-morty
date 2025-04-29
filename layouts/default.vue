@@ -2,19 +2,46 @@
   <header class="bg-dark">
     <ul class="nav nav-pills nav-fill flex-column flex-sm-row p-3">
       <li class="nav-item">
-        <NuxtLink to="/" class="nav-link text-white">Главная</NuxtLink>
+        <NuxtLink to="/" class="nav-link text-white">
+          <BIcon
+              icon="bi:house-door-fill"
+              margin="2"
+          />
+          Главная</NuxtLink>
       </li>
       <li class="nav-item">
-        <NuxtLink to="/characters" class="nav-link text-white">Персонажи</NuxtLink>
+        <NuxtLink to="/characters" class="nav-link text-white">
+          <BIcon
+              icon="bi:person-fill"
+              margin="2"
+          />
+          Персонажи
+        </NuxtLink>
       </li>
       <li class="nav-item">
-        <NuxtLink to="/locations" class="nav-link text-white">Локации</NuxtLink>
+        <NuxtLink to="/locations" class="nav-link text-white">
+          <BIcon
+              icon="bi:signpost-fill"
+              margin="2"
+          />
+          Локации
+        </NuxtLink>
       </li>
       <li class="nav-item">
-        <NuxtLink to="/episodes" class="nav-link text-white">Эпизоды</NuxtLink>
+        <NuxtLink to="/episodes" class="nav-link text-white">
+          <BIcon
+              icon="bi:puzzle-fill"
+              margin="2"
+          />
+          Эпизоды</NuxtLink>
       </li>
       <li class="nav-item">
-        <NuxtLink to="/favorite" class="nav-link text-white">Избранное</NuxtLink>
+        <NuxtLink to="/favorite" class="nav-link text-white">
+          <BIcon
+              icon="bi:heart-fill"
+              margin="2"
+          />
+          Избранное</NuxtLink>
       </li>
     </ul>
   </header>
@@ -30,7 +57,11 @@
   .router-link-exact-active.text-white,
   .nav-link:hover,
   .nav-link:focus {
-    color: red !important;
+    color: hotpink !important;
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
   }
 </style>
 <script setup lang="ts">

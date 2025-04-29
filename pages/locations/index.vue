@@ -1,23 +1,35 @@
 <script setup>
-  const { data } = await useFetch('https://rickandmortyapi.com/api/location');
-  const locations = ref(data.value.results);
+  // const { data } = await useFetch('https://rickandmortyapi.com/api/location');
+  // const locations = ref(data.value.results);
 
   import { useLocationsStore } from '@/stores/locationsStore';
-  const locStore = useLocationsStore();
+  const myStore = useLocationsStore();
 </script>
 
 <template>
-  <i class="title">Локации</i>
-  <p>Всего: {{ locStore.count }}</p>
-  <ul>
-    <li v-for="elem in locations" :key="elem.id">
-      <LocationLink :location="elem" />
-    </li>
-  </ul>
+  <Container>
+
+    <Row>
+      <h4 class="title">Локации</h4>
+      <p class="text-secondary">Всего: {{ myStore.count }}</p>
+
+      <ul>
+        <li v-for="elem in myStore.items" :key="elem.id">
+          <LocationLink :location="elem" />
+        </li>
+      </ul>
+
+      <nav aria-label="pagination">
+        <Paginator url="/locations/page/$/" :active="myStore.currentPage" :total="myStore.pages" />
+      </nav>
+    </Row>
+
+  </Container>
 </template>
 
 <style scoped>
-.title {
-  color: red;
+.row {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 }
 </style>
