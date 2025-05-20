@@ -2,10 +2,6 @@
   import { useFavoritesStore } from '@/stores/favoritesStore';
 
   const favoritesStore = useFavoritesStore();
-
-  const removeFav = (item) => {
-    favoritesStore.removeFavCharacter(item);
-  };
 </script>
 
 <template>
@@ -20,7 +16,7 @@
           <IconBox
               icon="bi:hand-thumbs-down-fill"
               size="sm"
-              @click="removeFav(elem)"
+              @click="favoritesStore.removeFavCharacter(elem)"
           />
         </li>
       </ul>
@@ -36,7 +32,7 @@
           <IconBox
               icon="bi:hand-thumbs-down-fill"
               size="sm"
-              @click="removeFav(elem)"
+              @click="favoritesStore.removeFavLocation(elem)"
           />
         </li>
       </ul>
@@ -52,7 +48,7 @@
           <IconBox
               icon="bi:hand-thumbs-down-fill"
               size="sm"
-              @click="removeFav(elem)"
+              @click="favoritesStore.removeFavEpisode(elem)"
           />
         </li>
       </ul>

@@ -10,12 +10,22 @@ export const useFavoritesStore = defineStore('Favorites', {
     actions: {
         addFavCharacter(item: any): void {
             this.characters.push(item);
-            console.log('add', this.characters);
+            console.log('add character', this.characters);
         },
 
         removeFavCharacter(item: any): void {
             this.characters.splice(this.characters.indexOf(item), 1);
-            console.log('remove', this.characters);
+            console.log('remove character', this.characters);
+        },
+
+        addFavEpisode(item: any): void {
+            this.episodes.push(item);
+            console.log('add episode', this.episodes);
+        },
+
+        removeFavEpisode(item: any): void {
+            this.episodes.splice(this.episodes.indexOf(item), 1);
+            console.log('remove episode', this.episodes);
         }
     },
 });

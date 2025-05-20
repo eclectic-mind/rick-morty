@@ -1,6 +1,7 @@
 <script setup>
   import { useEpisodesStore } from '@/stores/episodesStore';
   const myStore = useEpisodesStore();
+  const favStore = useFavoritesStore();
 
   myStore.init();
 
@@ -8,11 +9,11 @@
 
   console.log('mystore', myStore);
 
-  const findItem = () => {
-    let result = {};
+  const findItem = (array, id) => {
+    let result = null;
 
-    myStore.items.forEach((item) => {
-      if (Number(item.id) === Number(e_id)) {
+    array.forEach((item) => {
+      if (Number(item.id) === Number(id)) {
         result = item;
       }
     });
@@ -30,7 +31,23 @@
     return `/characters/character-${number}`;
   };
 
-  const currentItem = findItem();
+  const checkFav = (id) => {
+    const inFavorites = findItem(favStore.episodes, id);
+
+    return inFavorites ? 'pink' : 'white';
+  };
+
+  const setFav = (item) => {
+    const inFavorites = findItem(favStore.episodes, e_id);
+
+    if (!inFavorites) {
+      favStore.addFavEpisode(item);
+    } else {
+      favStore.removeFavEpisode(item);
+    }
+  };
+
+  const currentItem = findItem(myStore.items, e_id);
 
   console.log('current item', currentItem);
 </script>
@@ -43,7 +60,15 @@
 
       <Col col="sm-12 md-9 lg-6">
         <Card background-color="info-subtle">
-          <CardHeader><b>Id</b> from route: {{ e_id }}</CardHeader>
+          <CardHeader>
+            <div><b>Id</b> from route: {{ e_id }}</div>
+            <IconBox
+                icon="bi:heart-fill"
+                size="lg"
+                :color="checkFav(e_id)"
+                @click="setFav(currentItem)"
+            />
+          </CardHeader>
           <CardBody>
             <CardTitle>{{ currentItem.name }}
               <Badge color="warning">
@@ -86,5 +111,9 @@
   }
   .btn {
     margin: 4px 8px 4px 0;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
   }
 </style>

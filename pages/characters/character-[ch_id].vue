@@ -47,7 +47,7 @@
     }
   };
 
-  const currentItem = findItem(myStore.items, ch_id);
+  const currentItem = await myStore.fetchCharacterById(ch_id);
 
   console.log('item', currentItem);
 </script>

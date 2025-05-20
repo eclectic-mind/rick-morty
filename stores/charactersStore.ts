@@ -28,6 +28,16 @@ export const useCharactersStore = defineStore('Characters', {
                 this.count = this.items.length;
                 this.pages = Math.ceil(this.count / this.perPage);
             });
+        },
+
+        async fetchCharacterById(id) {
+            const currentItem = this.items.find(item => item.id === id);
+
+            if (currentItem) {
+                return currentItem;
+            }
+
+            return await $fetch(`https://rickandmortyapi.com/api/character/${id}`);
         }
     },
 });

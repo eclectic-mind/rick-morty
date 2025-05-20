@@ -1,10 +1,38 @@
 <script setup lang="ts">
-  import { useEpisodesStore } from '@/stores/episodesStore';
   const myStore = useEpisodesStore();
+  const favStore = useFavoritesStore();
 
   myStore.init();
 
   console.log('mystore', myStore);
+
+  const findItem = (array: [], id: number) => {
+    let result = null;
+
+    array.forEach((item: any) => {
+      if (Number(item.id) === Number(id)) {
+        result = item;
+      }
+    });
+
+    return result;
+  };
+
+  const checkFav = (id) => {
+    const inFavorites = findItem(favStore.episodes, id);
+
+    return inFavorites ? 'pink' : 'white';
+  };
+
+  const setFav = (item) => {
+    const inFavorites = findItem(favStore.episodes, item.id);
+
+    if (!inFavorites) {
+      favStore.addFavEpisode(item);
+    } else {
+      favStore.removeFavEpisode(item);
+    }
+  };
 </script>
 
 <template>
@@ -17,11 +45,17 @@
       <ul>
         <li v-for="elem in myStore.items" :key="elem.id">
           <EpisodeLink :episode="elem" />
+          <IconBox
+              icon="bi:heart-fill"
+              size="sm"
+              :color="checkFav(elem.id)"
+              @click="setFav(elem)"
+          />
         </li>
       </ul>
 
       <nav aria-label="pagination">
-        <Paginator url="/characters/page/$/" :active="myStore.currentPage" :total="myStore.pages" />
+        <Paginator url="/episodes/page/$/" :active="myStore.currentPage" :total="myStore.pages" />
       </nav>
     </Row>
 
