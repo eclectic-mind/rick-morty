@@ -2,12 +2,9 @@
   import { useEpisodesStore } from '@/stores/episodesStore';
   const myStore = useEpisodesStore();
   const favStore = useFavoritesStore();
-
-  myStore.init();
-
   const { e_id } = useRoute().params;
 
-  console.log('mystore', myStore);
+  myStore.init();
 
   const findItem = (array, id) => {
     let result = null;
@@ -47,9 +44,7 @@
     }
   };
 
-  const currentItem = findItem(myStore.items, e_id);
-
-  console.log('current item', currentItem);
+  const currentItem = await myStore.fetchEpisodeById(e_id);
 </script>
 
 <template>
@@ -76,9 +71,9 @@
               </Badge>
             </CardTitle>
             <CardText>
-              <b>Air date:</b> {{ currentItem.air_date }}<br>
-              <b>Characters:</b><br>
-              <div>
+              <p><b>Air date:</b> {{ currentItem.air_date }}</p>
+              <p v-if="currentItem.characters"><b>Characters:</b></p>
+              <div v-if="currentItem.characters">
                 <Anchor v-for="character in currentItem.characters"
                         button
                         size="sm"
@@ -115,5 +110,9 @@
   .card-header {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+  }
+  p {
+    margin-bottom: 0.5rem;
   }
 </style>

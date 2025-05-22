@@ -26,6 +26,16 @@ export const useFavoritesStore = defineStore('Favorites', {
         removeFavEpisode(item: any): void {
             this.episodes.splice(this.episodes.indexOf(item), 1);
             console.log('remove episode', this.episodes);
+        },
+
+        addFavLocation(item: any): void {
+            this.locations.push(item);
+            console.log('add location', this.locations);
+        },
+
+        removeFavLocation(item: any): void {
+            this.locations.splice(this.locations.indexOf(item), 1);
+            console.log('remove location', this.locations);
         }
     },
 });

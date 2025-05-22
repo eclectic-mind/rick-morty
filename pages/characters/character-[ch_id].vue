@@ -48,8 +48,6 @@
   };
 
   const currentItem = await myStore.fetchCharacterById(ch_id);
-
-  console.log('item', currentItem);
 </script>
 
 <template>
@@ -78,12 +76,12 @@
               </Badge>
             </CardTitle>
             <CardText>
-              <b>Gender:</b> {{ currentItem.gender }}<br>
-              <b>Specie:</b> {{ currentItem.species }}<br>
-              <b>Origin:</b> {{ currentItem.origin['name'] }}<br>
-              <b>Location:</b> {{ currentItem.location['name'] }}<br>
-              <b>In episodes:</b><br>
-              <div>
+              <p><b>Gender:</b> {{ currentItem.gender }}</p>
+              <p><b>Specie:</b> {{ currentItem.species }}</p>
+              <p><b>Origin:</b> {{ currentItem.origin['name'] }}</p>
+              <p><b>Location:</b> {{ currentItem.location['name'] }}</p>
+              <p v-if="currentItem.episode"><b>In episodes:</b></p>
+              <div v-if="currentItem.episode">
                 <Anchor v-for="episode in currentItem.episode"
                     button
                     size="sm"
@@ -125,5 +123,8 @@
   }
   .btn {
     margin: 4px 8px 4px 0;
+  }
+  p {
+    margin-bottom: 0.5rem;
   }
 </style>

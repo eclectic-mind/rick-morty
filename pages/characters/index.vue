@@ -1,12 +1,4 @@
 <script setup lang="ts">
-  // const { data } = await useFetch('https://rickandmortyapi.com/api/character');
-  // const characters = ref(data.value.results);
-
-  //  perPage = 5;
-  // const total = [...characters].length;
-
-  // console.log('data', characters, typeof characters);
-
   const myStore = useCharactersStore();
   const favStore = useFavoritesStore();
 

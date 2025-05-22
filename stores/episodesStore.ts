@@ -17,17 +17,23 @@ export const useEpisodesStore = defineStore('Episodes', {
         fetchData() {
             $fetch('https://rickandmortyapi.com/api/episode')
                 .then(response => {
-                    console.log('response', response);
-
                     this.items = Object.values(response?.results);
                     this.count = this.items.length;
                     this.pages = Math.ceil(this.count / this.perPage);
-
-                    console.log('episodes', this.items, typeof this.items);
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        },
+
+        async fetchEpisodeById(id: number) {
+            const currentItem = this.items.find(item => item.id === id);
+
+            if (currentItem) {
+                return currentItem;
+            }
+
+            return await $fetch(`https://rickandmortyapi.com/api/episode/${id}`);
         }
     },
 });
