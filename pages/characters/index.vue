@@ -1,13 +1,15 @@
 <script setup lang="ts">
+  import {ICharacterItem} from "~/stores/types";
+
   const myStore = useCharactersStore();
   const favStore = useFavoritesStore();
 
   myStore.init();
 
-  const findItem = (array: [], id: number) => {
+  const findItem = (array: ICharacterItem[], id: number): ICharacterItem => {
     let result = null;
 
-    array.forEach((item: any) => {
+    array.forEach((item: ICharacterItem) => {
       if (Number(item.id) === Number(id)) {
         result = item;
       }
@@ -16,14 +18,14 @@
     return result;
   };
 
-  const checkFav = (id) => {
-    const inFavorites = findItem(favStore.characters, id);
+  const checkFav = (id: number): string => {
+    const inFavorites: boolean = findItem(favStore.characters, id);
 
     return inFavorites ? 'pink' : 'white';
   };
 
-  const setFav = (item) => {
-    const inFavorites = findItem(favStore.characters, item.id);
+  const setFav = (item: ICharacterItem): void => {
+    const inFavorites: boolean = findItem(favStore.characters, item.id);
 
     if (!inFavorites) {
       favStore.addFavCharacter(item);

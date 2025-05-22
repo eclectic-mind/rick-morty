@@ -1,15 +1,16 @@
-<script setup>
-  import { useEpisodesStore } from '@/stores/episodesStore';
+<script setup lang="ts">
+  import {IEpisodeItem} from "~/stores/types";
+
   const myStore = useEpisodesStore();
   const favStore = useFavoritesStore();
-  const { e_id } = useRoute().params;
+  const { e_id }: number = useRoute().params;
 
   myStore.init();
 
-  const findItem = (array, id) => {
+  const findItem = (array: IEpisodeItem[], id: number): IEpisodeItem => {
     let result = null;
 
-    array.forEach((item) => {
+    array.forEach((item: IEpisodeItem) => {
       if (Number(item.id) === Number(id)) {
         result = item;
       }
@@ -18,24 +19,24 @@
     return result;
   };
 
-  const getLinkName = (data) => {
-    const array = data.split('/');
+  const getLinkName = (data: string): string => {
+    const array: [] = data.split('/');
     return array[array.length - 1];
   };
 
-  const getLink = (data) => {
-    const number = getLinkName(data);
+  const getLink = (data: string): string => {
+    const number: number = getLinkName(data);
     return `/characters/character-${number}`;
   };
 
-  const checkFav = (id) => {
-    const inFavorites = findItem(favStore.episodes, id);
+  const checkFav = (id: number): string => {
+    const inFavorites: boolean = findItem(favStore.episodes, id);
 
     return inFavorites ? 'pink' : 'white';
   };
 
-  const setFav = (item) => {
-    const inFavorites = findItem(favStore.episodes, e_id);
+  const setFav = (item: IEpisodeItem): void => {
+    const inFavorites: boolean = findItem(favStore.episodes, e_id);
 
     if (!inFavorites) {
       favStore.addFavEpisode(item);
@@ -44,7 +45,7 @@
     }
   };
 
-  const currentItem = await myStore.fetchEpisodeById(e_id);
+  const currentItem: IEpisodeItem = await myStore.fetchEpisodeById(e_id);
 </script>
 
 <template>
@@ -72,7 +73,7 @@
             </CardTitle>
             <CardText>
               <p><b>Air date:</b> {{ currentItem.air_date }}</p>
-              <p v-if="currentItem.characters"><b>Characters:</b></p>
+              <p v-if="currentItem.characters"><b>Episodes:</b></p>
               <div v-if="currentItem.characters">
                 <Anchor v-for="character in currentItem.characters"
                         button

@@ -1,5 +1,5 @@
-import { useCharactersStore } from "@/stores/charactersStore";
-import { useLocationsStore } from "@/stores/locationsStore";
-import { useEpisodesStore } from "@/stores/episodesStore";
-import { useFavoritesStore } from "@/stores/favoritesStore";
+import { useCharactersStore } from "@/stores/characters";
+import { useLocationsStore } from "@/stores/locations";
+import { useEpisodesStore } from "@/stores/episodes";
+import { useFavoritesStore } from "@/stores/favorites";
 export { useLocationsStore, useCharactersStore, useEpisodesStore, useFavoritesStore };

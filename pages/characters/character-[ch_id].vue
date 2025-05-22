@@ -1,14 +1,16 @@
-<script setup>
-  const { ch_id } = useRoute().params;
+<script setup lang="ts">
+import {ICharacterItem} from '~/stores/types';
+
+  const { ch_id }: number = useRoute().params;
   const myStore = useCharactersStore();
   const favStore = useFavoritesStore();
 
   myStore.init();
 
-  const findItem = (array, id) => {
-    let result = null;
+  const findItem = (array: ICharacterItem[], id: number): ICharacterItem => {
+    let result: ICharacterItem | null = null;
 
-    array.forEach((item) => {
+    array.forEach((item: ICharacterItem) => {
       if (Number(item.id) === Number(id)) {
         result = item;
       }
@@ -17,28 +19,28 @@
     return result;
   };
 
-  const getLinkName = (data) => {
-    const array = data.split('/');
+  const getLinkName = (data: string): string => {
+    const array: [] = data.split('/');
     return array[array.length - 1];
   };
 
-  const getLink = (data) => {
-    const number = getLinkName(data);
+  const getLink = (data: string): string => {
+    const number: number = getLinkName(data);
     return `/episodes/episode-${number}`;
   };
 
-  const checkStatus = (status) => {
+  const checkStatus = (status: string): string => {
     return status === 'Alive' ? 'danger' : status === 'Dead' ? 'dark' : 'secondary';
   };
 
-  const checkFav = (id) => {
-    const inFavorites = findItem(favStore.characters, id);
+  const checkFav = (id: number): string => {
+    const inFavorites: boolean = findItem(favStore.characters, id);
 
     return inFavorites ? 'pink' : 'white';
   };
 
-  const setFav = (item) => {
-    const inFavorites = findItem(favStore.characters, ch_id);
+  const setFav = (item: ICharacterItem): void => {
+    const inFavorites: boolean = findItem(favStore.characters, ch_id);
 
     if (!inFavorites) {
       favStore.addFavCharacter(item);
@@ -47,7 +49,7 @@
     }
   };
 
-  const currentItem = await myStore.fetchCharacterById(ch_id);
+  const currentItem: ICharacterItem = await myStore.fetchCharacterById(ch_id);
 </script>
 
 <template>

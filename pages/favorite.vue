@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import { useFavoritesStore } from '@/stores/favoritesStore';
-
   const favoritesStore = useFavoritesStore();
 </script>
 

@@ -1,15 +1,15 @@
 <script setup lang="ts">
+  import {IEpisodeItem} from "~/stores/types";
+
   const myStore = useEpisodesStore();
   const favStore = useFavoritesStore();
 
   myStore.init();
 
-  console.log('mystore', myStore);
-
-  const findItem = (array: [], id: number) => {
+  const findItem = (array: IEpisodeItem[], id: number): IEpisodeItem => {
     let result = null;
 
-    array.forEach((item: any) => {
+    array.forEach((item: IEpisodeItem) => {
       if (Number(item.id) === Number(id)) {
         result = item;
       }
@@ -18,14 +18,14 @@
     return result;
   };
 
-  const checkFav = (id) => {
-    const inFavorites = findItem(favStore.episodes, id);
+  const checkFav = (id: number): string => {
+    const inFavorites: boolean = findItem(favStore.episodes, id);
 
     return inFavorites ? 'pink' : 'white';
   };
 
-  const setFav = (item) => {
-    const inFavorites = findItem(favStore.episodes, item.id);
+  const setFav = (item: IEpisodeItem): void => {
+    const inFavorites: boolean = findItem(favStore.episodes, e_id);
 
     if (!inFavorites) {
       favStore.addFavEpisode(item);

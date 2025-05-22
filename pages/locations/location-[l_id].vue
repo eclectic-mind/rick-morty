@@ -1,15 +1,16 @@
-<script setup>
-  import { useLocationsStore } from '@/stores/locationsStore';
+<script setup lang="ts">
+  import {ILocationItem} from "~/stores/types";
+
   const myStore = useLocationsStore();
   const favStore = useFavoritesStore();
-  const { l_id } = useRoute().params;
+  const { l_id }: number = useRoute().params;
 
   myStore.init();
 
-  const findItem = (array, id) => {
+  const findItem = (array: ILocationItem[], id: number): ILocationItem => {
     let result = null;
 
-    array.forEach((item) => {
+    array.forEach((item: ILocationItem) => {
       if (Number(item.id) === Number(id)) {
         result = item;
       }
@@ -18,13 +19,13 @@
     return result;
   };
 
-  const getLinkName = (data) => {
-    const array = data.split('/');
+  const getLinkName = (data: string): string => {
+    const array: [] = data.split('/');
     return array[array.length - 1];
   };
 
-  const getLink = (data) => {
-    const number = getLinkName(data);
+  const getLink = (data: string): string => {
+    const number: number = getLinkName(data);
     return `/characters/character-${number}`;
   };
 

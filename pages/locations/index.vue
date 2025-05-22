@@ -1,38 +1,38 @@
 <script setup lang="ts">
-const myStore = useLocationsStore();
-const favStore = useFavoritesStore();
+  import {ILocationItem} from "~/stores/types";
 
-myStore.init();
+  const myStore = useLocationsStore();
+  const favStore = useFavoritesStore();
 
-console.log('mystore', myStore);
+  myStore.init();
 
-const findItem = (array: [], id: number) => {
-  let result = null;
+  const findItem = (array: ILocationItem[], id: number): ILocationItem => {
+    let result = null;
 
-  array.forEach((item: any) => {
-    if (Number(item.id) === Number(id)) {
-      result = item;
+    array.forEach((item: ILocationItem) => {
+      if (Number(item.id) === Number(id)) {
+        result = item;
+      }
+    });
+
+    return result;
+  };
+
+  const checkFav = (id: number): string => {
+    const inFavorites: boolean = findItem(favStore.locations, id);
+
+    return inFavorites ? 'pink' : 'white';
+  };
+
+  const setFav = (item: ILocationItem): void => {
+    const inFavorites: boolean = findItem(favStore.locations, item.id);
+
+    if (!inFavorites) {
+      favStore.addFavLocation(item);
+    } else {
+      favStore.removeFavLocation(item);
     }
-  });
-
-  return result;
-};
-
-const checkFav = (id) => {
-  const inFavorites = findItem(favStore.locations, id);
-
-  return inFavorites ? 'pink' : 'white';
-};
-
-const setFav = (item) => {
-  const inFavorites = findItem(favStore.locations, item.id);
-
-  if (!inFavorites) {
-    favStore.addFavLocation(item);
-  } else {
-    favStore.removeFavLocation(item);
-  }
-};
+  };
 </script>
 
 <template>
