@@ -1,3 +1,13 @@
+<script setup lang="ts">
+  const favStore = useFavoritesStore();
+  const favCounter = ref('fav-counter');
+  const sum = favStore.sum;
+
+  const updateSum = (): void => {
+    favCounter.value = sum;
+  }
+</script>
+
 <template>
   <header class="bg-dark">
     <ul class="nav nav-pills nav-fill flex-column flex-sm-row p-3">
@@ -41,7 +51,9 @@
               icon="bi:heart-fill"
               margin="2"
           />
-          Избранное</NuxtLink>
+          Избранное
+          <span class="badge bg-info" ref="fav-counter">{{ sum }}</span>
+        </NuxtLink>
       </li>
     </ul>
   </header>
@@ -59,10 +71,13 @@
   .nav-link:focus {
     color: hotpink !important;
   }
+
   .nav-link {
     display: flex;
     align-items: center;
+
+    .bg-info {
+      margin-left: 8px;
+    }
   }
 </style>
-<script setup lang="ts">
-</script>

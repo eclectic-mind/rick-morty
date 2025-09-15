@@ -20,7 +20,7 @@ import {ICharacterItem} from '~/stores/types';
   };
 
   const getLinkName = (data: string): string => {
-    const array: [] = data.split('/');
+    const array: string[] = data.split('/');
     return array[array.length - 1];
   };
 

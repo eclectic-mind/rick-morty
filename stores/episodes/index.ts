@@ -4,7 +4,8 @@ export const useEpisodesStore = defineStore('Episodes', {
     state: () => ({
         count: 0,
         pages: 0,
-        perPage: 6,
+        prev: null,
+        next: null,
         currentPage: 1,
         items: []
     }),
@@ -15,11 +16,14 @@ export const useEpisodesStore = defineStore('Episodes', {
         },
 
         fetchData() {
-            $fetch('https://rickandmortyapi.com/api/episode')
+            $fetch(`https://rickandmortyapi.com/api/episode/?page=${this.currentPage}`)
                 .then(response => {
                     this.items = Object.values(response?.results);
-                    this.count = this.items.length;
-                    this.pages = Math.ceil(this.count / this.perPage);
+                    const info = response?.info;
+                    this.count = info.count;
+                    this.pages = info.pages;
+                    this.prev = info.prev;
+                    this.next = info.next;
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -34,6 +38,10 @@ export const useEpisodesStore = defineStore('Episodes', {
             }
 
             return await $fetch(`https://rickandmortyapi.com/api/episode/${id}`);
-        }
+        },
+
+        setCurrentPage(value: number) {
+            this.currentPage = value;
+        },
     },
 });

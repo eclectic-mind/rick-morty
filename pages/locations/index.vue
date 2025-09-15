@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import {ILocationItem} from "~/stores/types";
+  import type {ILocationItem} from "~/stores/types";
 
   const myStore = useLocationsStore();
   const favStore = useFavoritesStore();
@@ -55,7 +55,12 @@
       </ul>
 
       <nav aria-label="pagination">
-        <Paginator url="/locations/page/$/" :active="myStore.currentPage" :total="myStore.pages" />
+        <Pagination :active="myStore.currentPage"
+                    :pages="myStore.pages"
+                    :next="myStore.next"
+                    :prev="myStore.prev"
+                    url="/locations/page/$/"
+        />
       </nav>
     </Row>
 

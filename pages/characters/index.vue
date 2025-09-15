@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import {ICharacterItem} from "~/stores/types";
+  import type {ICharacterItem} from "~/stores/types";
 
   const myStore = useCharactersStore();
   const favStore = useFavoritesStore();
@@ -55,7 +55,12 @@
         </ul>
 
         <nav aria-label="pagination">
-          <Paginator url="/characters/page/$/" :active="myStore.currentPage" :total="myStore.pages" />
+          <Pagination :active="myStore.currentPage"
+                      :pages="myStore.pages"
+                      :next="myStore.next"
+                      :prev="myStore.prev"
+                      url="/characters/page/$/"
+          />
         </nav>
     </Row>
 

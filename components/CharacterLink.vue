@@ -4,7 +4,7 @@
 
 <template>
   <NuxtLink :to="`/characters/character-${character.id}`" :data="character" color="info">
-    <b>{{ character.name }}</b> (id: {{ character.id }})
+    {{ character.name }} (id: {{ character.id }})
   </NuxtLink>
 </template>
 

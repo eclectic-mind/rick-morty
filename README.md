@@ -25,7 +25,7 @@ bun install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm - запускаем локально
+# npm - запускаем локально!
 npm run dev
 
 # pnpm

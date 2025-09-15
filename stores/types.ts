@@ -38,3 +38,11 @@ export interface ILocationItem {
     url: string,
     created: string
 }
+
+export interface IPaginationData {
+    active: number;
+    pages: number;
+    next: string | null;
+    prev: string | null;
+    url: string;
+}

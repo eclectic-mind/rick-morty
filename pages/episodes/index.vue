@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import {IEpisodeItem} from "~/stores/types";
+import type {ICharacterItem, IEpisodeItem} from "~/stores/types";
 
   const myStore = useEpisodesStore();
   const favStore = useFavoritesStore();
@@ -25,7 +25,7 @@
   };
 
   const setFav = (item: IEpisodeItem): void => {
-    const inFavorites: boolean = findItem(favStore.episodes, e_id);
+    const inFavorites: boolean = findItem(favStore.episodes, item.id);
 
     if (!inFavorites) {
       favStore.addFavEpisode(item);
@@ -55,7 +55,12 @@
       </ul>
 
       <nav aria-label="pagination">
-        <Paginator url="/episodes/page/$/" :active="myStore.currentPage" :total="myStore.pages" />
+        <Pagination :active="myStore.currentPage"
+                    :pages="myStore.pages"
+                    :next="myStore.next"
+                    :prev="myStore.prev"
+                    url="/episodes/page/$/"
+        />
       </nav>
     </Row>
 
