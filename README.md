@@ -45,6 +45,10 @@ npm run dev -- -o
 
 Build the application for production:
 
+```
+npx nuxi generate
+```
+
 ```bash
 # npm
 npm run build

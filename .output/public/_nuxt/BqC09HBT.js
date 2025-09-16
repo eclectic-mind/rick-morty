@@ -1,1 +1,0 @@
-import{_ as o,c as s,a,t,F as r,o as l}from"./BFcZSthA.js";const c={};function d(n,e){return l(),s(r,null,[e[0]||(e[0]=a("h1",null,"Home page",-1)),a("p",null,t(n.some),1)],64)}const _=o(c,[["render",d],["__scopeId","data-v-1f305dab"]]);export{_ as default};
