@@ -60,6 +60,7 @@ import type {ICharacterItem, IEpisodeItem} from "~/stores/types";
                     :next="myStore.next"
                     :prev="myStore.prev"
                     url="/episodes"
+                    type="episodes"
         />
       </nav>
     </Row>

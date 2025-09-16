@@ -60,6 +60,7 @@
                       :next="myStore.next"
                       :prev="myStore.prev"
                       url="/characters"
+                      type="characters"
           />
         </nav>
     </Row>

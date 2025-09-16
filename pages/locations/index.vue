@@ -60,6 +60,7 @@
                     :next="myStore.next"
                     :prev="myStore.prev"
                     url="/locations"
+                    type="locations"
         />
       </nav>
     </Row>

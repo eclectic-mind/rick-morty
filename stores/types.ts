@@ -45,4 +45,5 @@ export interface IPaginationData {
     next: string | null;
     prev: string | null;
     url: string;
+    type: string;
 }

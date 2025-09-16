@@ -1,12 +1,22 @@
 <script setup lang="ts">
 import type {IPaginationData} from "~/stores/types";
-const myStore = useCharactersStore();
+const characterStore = useCharactersStore();
+const locationsStore = useLocationsStore();
+const episodesStore = useEpisodesStore();
 const props = defineProps<IPaginationData>();
 
-myStore.init();
+characterStore.init();
+locationsStore.init();
+episodesStore.init();
 
 async function changePage(id: number): Promise<void> {
-  myStore.setCurrentPage(id);
+  if (props.type === 'characters') {
+    characterStore.setCurrentPage(id);
+  } else if (props.type === 'episodes') {
+    episodesStore.setCurrentPage(id);
+  } else if (props.type === 'locations') {
+    locationsStore.setCurrentPage(id);
+  }
 
   await navigateTo({
     path: props.url,
