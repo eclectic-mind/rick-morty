@@ -22,6 +22,7 @@
     "vue": "latest"
   },
   "devDependencies": {
-    "@nuxt/types": "^2.13.2"
+    "@nuxt/types": "^2.13.2",
+    "nuxt-vite": "^0.3.5"
   }
 }
