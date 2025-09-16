@@ -41,7 +41,10 @@ export const useCharactersStore = defineStore('Characters', {
         },
 
         setCurrentPage(value: number) {
-            this.currentPage = value;
+            if (this.currentPage !== value) {
+                this.currentPage = value;
+                this.fetchData();
+            }
         },
     },
 });

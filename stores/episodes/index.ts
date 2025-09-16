@@ -41,7 +41,10 @@ export const useEpisodesStore = defineStore('Episodes', {
         },
 
         setCurrentPage(value: number) {
-            this.currentPage = value;
+            if (this.currentPage !== value) {
+                this.currentPage = value;
+                this.fetchData();
+            }
         },
     },
 });

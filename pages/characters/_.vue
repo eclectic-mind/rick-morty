@@ -59,7 +59,7 @@
                       :pages="myStore.pages"
                       :next="myStore.next"
                       :prev="myStore.prev"
-                      url="/characters"
+                      url="/characters/page/$/"
           />
         </nav>
     </Row>
