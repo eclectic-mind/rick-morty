@@ -5,6 +5,15 @@
 <template>
   <Container>
     <Row>
+      <b-button
+          color="danger"
+          size="lg"
+          @click="favoritesStore.clearAll()">
+        Очистить всё
+      </b-button>
+    </Row>
+
+    <Row>
       <h5 class="title">Избранные персонажи</h5>
       <p class="text-secondary">Всего: {{ favoritesStore.characters.length }}</p>
 
@@ -62,5 +71,8 @@
   .icon-box {
     cursor: pointer;
     pointer-events: all;
+  }
+  .btn {
+    width: fit-content;
   }
 </style>

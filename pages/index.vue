@@ -3,7 +3,7 @@
 
 <template>
   <h1>Home page</h1>
-  <p>{{ some }}</p>
+  <p>...</p>
 </template>
 
 <style scoped>

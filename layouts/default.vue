@@ -1,11 +1,18 @@
 <script setup lang="ts">
   const favStore = useFavoritesStore();
-  const favCounter = ref('fav-counter');
-  const sum = favStore.sum;
 
-  const updateSum = (): void => {
-    favCounter.value = sum;
-  }
+  useHead({
+    title: 'Rick and Morty',
+    meta: [
+      {
+        name: 'description',
+        content: 'My amazing site'
+      }
+    ],
+    bodyAttrs: {
+      class: 'test'
+    }
+  })
 </script>
 
 <template>
@@ -52,7 +59,7 @@
               margin="2"
           />
           Избранное
-          <span class="badge bg-info" ref="fav-counter">{{ sum }}</span>
+          <span class="badge bg-info">{{ favStore.sum }}</span>
         </NuxtLink>
       </li>
     </ul>

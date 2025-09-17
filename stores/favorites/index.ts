@@ -39,8 +39,18 @@ export const useFavoritesStore = defineStore('Favorites', {
             this.countSum();
         },
 
-        countSum(): number {
-            return this.characters.length + this.locations.length + this.episodes.length;
+        countSum(): void {
+            this.sum = this.characters.length + this.locations.length + this.episodes.length;
+        },
+
+        async clearAll() {
+            this.locations = [];
+            this.characters = [];
+            this.episodes = [];
+
+            await nextTick(() => {
+                this.countSum();
+            })
         }
-    },
+    }
 });

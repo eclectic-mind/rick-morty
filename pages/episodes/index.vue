@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {ICharacterItem, IEpisodeItem} from "~/stores/types";
+  import type {IEpisodeItem} from "~/stores/types";
 
   const myStore = useEpisodesStore();
   const favStore = useFavoritesStore();
